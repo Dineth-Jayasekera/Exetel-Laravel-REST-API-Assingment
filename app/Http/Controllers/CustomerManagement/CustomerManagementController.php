@@ -293,7 +293,7 @@ class CustomerManagementController extends Controller
                 );
             }
 
-            if ($customer != null) {
+            if ($customers != null) {
 
                 return HelperFunctions::returnData($all_customer, true, 'All Customers', 200);
 
