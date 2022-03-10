@@ -119,7 +119,6 @@ class CustomerManagementTest extends TestCase
 
         $response->assertStatus(200);
 
-
     }
 
 
