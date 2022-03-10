@@ -1,0 +1,519 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Exetel Laravel Rest API Assingment  Documentation",
+        "description": "Use this as x-api-key `GzK2!H4m@*Me%a-zPL4TYz#JBw26MsMMjJCSbr+=BVqp&3f8gyRk%TF2gaVkN8%$ydR$3rE#F*Eue*5Fj4GdD9he335?R+zpDvQR7m6v84YMBe6#38SDU8vvfvnWfxUx6+=jdhMtwfv4^7RbuhuF+B_$&M5ztsswcAMQ^%Fd4Wc*UD@#AtcxYF@Jey&H3M_JW23s4CYnk#?yrtZM_t!vdd2Z7L8pYat%Y2vMCPv#K&uQEZBbnCL3!6c579f%C%*Q` ",
+        "contact": {
+            "email": "dinethwa@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/api",
+            "description": "Local API Server"
+        }
+    ],
+    "paths": {
+        "/customer/create": {
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Create Customer In System",
+                "description": "Create Customers",
+                "operationId": "createCustomer",
+                "parameters": [
+                    {
+                        "parameter": "x-api-key",
+                        "name": "x-api-key",
+                        "in": "header",
+                        "description": "Application Verification Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data packet for Customer Creation",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            },
+                            "example": {
+                                "first_name": "Dineth",
+                                "last_name": "Jayasekera",
+                                "age": "24",
+                                "dob": "1997-11-19",
+                                "email": "dinethwa@gmail.com"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Customer Created"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something Went Wrong on customer creation."
+                                        },
+                                        "userMessage": {
+                                            "type": "string",
+                                            "example": "Something Went Wrong on customer creation."
+                                        },
+                                        "errorCode": {
+                                            "type": "string",
+                                            "example": "error Code"
+                                        },
+                                        "metaData": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/customer/get": {
+            "get": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Get All Customers In System",
+                "description": "Get All Customers",
+                "operationId": "getCustomers",
+                "parameters": [
+                    {
+                        "parameter": "x-api-key",
+                        "name": "x-api-key",
+                        "in": "header",
+                        "description": "Application Verification Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "All Customers"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "first_name": {
+                                                        "type": "string",
+                                                        "example": "Dineth"
+                                                    },
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string",
+                                                        "example": "Jayasekera"
+                                                    },
+                                                    "age": {
+                                                        "type": "string",
+                                                        "example": "25"
+                                                    },
+                                                    "date_of_birth": {
+                                                        "type": "string",
+                                                        "example": "1997-11-19"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "example": "dinethwa@gmail.com"
+                                                    },
+                                                    "creation_date": {
+                                                        "type": "string",
+                                                        "example": "2022-03-10 11:19:2"
+                                                    },
+                                                    "update_on": {
+                                                        "type": "string",
+                                                        "example": "2022-03-10 11:19:2"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something Went Wrong on customer data receiving."
+                                        },
+                                        "userMessage": {
+                                            "type": "string",
+                                            "example": "Something Went Wrong on customer data receiving."
+                                        },
+                                        "errorCode": {
+                                            "type": "string",
+                                            "example": "error Code"
+                                        },
+                                        "metaData": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/customer/update/{id}": {
+            "put": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Update Customer In System",
+                "description": "Update Customers",
+                "operationId": "updateCustomer",
+                "parameters": [
+                    {
+                        "parameter": "x-api-key",
+                        "name": "x-api-key",
+                        "in": "header",
+                        "description": "Application Verification Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "parameter": "id",
+                        "name": "id",
+                        "in": "path",
+                        "description": "Customer ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data packet for Customer Updation",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            },
+                            "example": {
+                                "first_name": "Dineth",
+                                "last_name": "Jayasekera",
+                                "age": "24",
+                                "dob": "1997-11-19",
+                                "email": "dinethwa@gmail.com"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Customer Updated"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something Went Wrong on customer updating."
+                                        },
+                                        "userMessage": {
+                                            "type": "string",
+                                            "example": "Something Went Wrong on customer updating."
+                                        },
+                                        "errorCode": {
+                                            "type": "string",
+                                            "example": "error Code"
+                                        },
+                                        "metaData": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/customer/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Delete Customer In System",
+                "description": "Delete Customers",
+                "operationId": "deleteCustomer",
+                "parameters": [
+                    {
+                        "parameter": "x-api-key",
+                        "name": "x-api-key",
+                        "in": "header",
+                        "description": "Application Verification Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "parameter": "id",
+                        "name": "id",
+                        "in": "path",
+                        "description": "Customer ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Customer Deleted"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something Went Wrong on customer deletion."
+                                        },
+                                        "userMessage": {
+                                            "type": "string",
+                                            "example": "Something Went Wrong on customer deletion."
+                                        },
+                                        "errorCode": {
+                                            "type": "string",
+                                            "example": "error Code"
+                                        },
+                                        "metaData": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/user/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Login User to System",
+                "description": "Login user and get access token",
+                "operationId": "userLogin",
+                "parameters": [
+                    {
+                        "parameter": "x-api-key",
+                        "name": "x-api-key",
+                        "in": "header",
+                        "description": "Application Verification Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data packet for User Login",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            },
+                            "example": {
+                                "username": "abcd",
+                                "password": "123456"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Welcome"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "access_token": {
+                                                    "type": "string",
+                                                    "example": "sample-token"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invalid Credentials"
+                                        },
+                                        "userMessage": {
+                                            "type": "string",
+                                            "example": "user Message"
+                                        },
+                                        "errorCode": {
+                                            "type": "string",
+                                            "example": "error Code"
+                                        },
+                                        "metaData": {
+                                            "type": "object",
+                                            "example": "error Code"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

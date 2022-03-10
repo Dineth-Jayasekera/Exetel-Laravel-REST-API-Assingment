@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CustomerManagement\CustomerManagementController;
+use App\Http\Controllers\UserManagement\UserManagementController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::group(['middleware' => 'app.auth.token'], function () {
+
+    Route::group(['prefix' => 'user'], function () {
+
+        /**API for user login*/
+        Route::post('login', [UserManagementController::class, 'userLogin']);
+
+    });
+
+    Route::group(['middleware' => 'login.status'], function () {
+
+        Route::group(['prefix' => 'customer'], function () {
+
+            /**API for customer creation*/
+            Route::post('create', [CustomerManagementController::class, 'createCustomer']);
+
+            /**API for all customers*/
+            Route::get('get', [CustomerManagementController::class, 'getCustomers']);
+
+            /**API for update customers*/
+            Route::put('update/{id}', [CustomerManagementController::class, 'updateCustomer']);
+
+            /**API for update customers*/
+            Route::delete('delete/{id}', [CustomerManagementController::class, 'deleteCustomer']);
+
+        });
+
+    });
+
 });
+
